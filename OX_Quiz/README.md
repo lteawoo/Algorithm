@@ -14,6 +14,21 @@ OX퀴즈의 결과가 주어졌을 때, 점수를 구하는 프로그램을 작�
 # 풀이
 <pre>
 <code>
+var n int
+var str string
+
+fmt.Fscan(reader, &n)
+
+for i := 0; i < n; i++ {
+    fmt.Fscan(reader, &str)
+    fmt.Fprintln(writer, calc(str))
+}
+</code>
+</pre>
+main 함수의 내용, 첫번째 줄에는 테스트 케이스가 주어지므로 n변수에 입력받는다, 두번째 줄부터는 문자열을 케이스 별로 입력받고 바로 다음 calc 함수를 호출하여 로직을 해결한다.
+* * *
+<pre>
+<code>
 func calc(str string) int {
 	var cnt, sum int
 
