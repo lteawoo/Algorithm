@@ -51,4 +51,4 @@ func getScale(N []int) string {
 
 </code>
 </pre>
-8개의 숫자를 받음과 동시에 연산한다, flag 변수를 이용하여 각 자리의 숫자를 받을 때 마다 1 증가하면 ascending, -1로 감소하면 descending, 그리고 외의 숫자로 증가되면 mixed로 판별하여 리턴한다.
+8개의 숫자를 받음과 동시에 연산한다, flag 변수를 이용하여 각 자리의 숫자를 받을 때 마다 1 증가하면 ascending, -1로 감소하면 descending, 그리고 flag가 N[i-1] - N[i]과 다르면(1 또는 -1 외의 값으로 증가됬으면) mixed로 판별한다.
