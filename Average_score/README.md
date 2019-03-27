@@ -17,15 +17,15 @@
 <pre>
 <code>
 var N, avg int
-	for i := 0; i < StudentCnt; i++ {
-		fmt.Fscan(reader, &N)
+for i := 0; i < StudentCnt; i++ {
+	fmt.Fscan(reader, &N)
 
-		if N < 40 {
-			N = 40
-		}
-
-		avg += N / StudentCnt
+	if N < 40 {
+		N = 40
 	}
+
+	avg += N / StudentCnt
+}
 </code>
 </pre>
 학생의 점수를 입력 받음과 동시에 40점 미만인지 체크 하여 학생 수로 나누고 avg 배열에 덧셈한다.
