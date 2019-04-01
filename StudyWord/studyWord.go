@@ -14,15 +14,19 @@ func main() {
 	var word string
 	var retMap map[byte]int
 	retMap = make(map[byte]int)
-
 	word, _ = reader.ReadString('\n')
-	fmt.Fprintf(writer, "%d\n", len(word))
 
+	//10 : Line Feed, 13 : Cariage Return
+	//13 10 으로 구성되어 있네..
 	for i := 0; i < len(word); i++ {
-		var char = byte(word[i])
+		char := byte(word[i])
 
-		if char >= 97 {
-			char -= 32
+		if char == 10 || char == 13 {
+			break
+		}
+
+		if char >= 'a' {
+			char -= 'a' - 'A'
 		}
 
 		_, exists := retMap[char]
@@ -45,5 +49,5 @@ func main() {
 		}
 	}
 
-	fmt.Fprintf(writer, "%c %d", maxKey, max)
+	fmt.Fprintf(writer, "%c", maxKey)
 }
