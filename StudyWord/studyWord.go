@@ -11,43 +11,35 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	defer writer.Flush()
 
-	var word string
-	var retMap map[byte]int
-	retMap = make(map[byte]int)
-	word, _ = reader.ReadString('\n')
-
-	//10 : Line Feed, 13 : Cariage Return
-	//13 10 으로 구성되어 있네..
-	for i := 0; i < len(word); i++ {
-		char := byte(word[i])
-
-		if char == 10 || char == 13 {
-			break
-		}
-
-		if char >= 'a' {
-			char -= 'a' - 'A'
-		}
-
-		_, exists := retMap[char]
-
-		if !exists {
-			retMap[char] = 1
-		} else {
-			retMap[char]++
-		}
-	}
+	var countArr []int
+	countArr = make([]int, 'Z'-'A'+1)
 
 	var max = 0
-	var maxKey byte
-	for key, val := range retMap {
-		if max < val {
-			max = val
-			maxKey = key
-		} else if max == val {
-			maxKey = '?'
+	var maxChar byte
+	for {
+		char, _ := reader.ReadByte()
+
+		//문자열의 끝(10, 13 각각 Line Feed, Return Carriage)을 체크하기 위한.. 그외의 문자가 아닌것도 겸사겸사 체크하여 중지하던지 함
+		if (('A' > char) || ('Z' < char)) && (('a' > char) || ('z' < char)) {
+			break
+		}
+		//소문자면 대문자로 변환(문자가 'a' 이상 -> 97 이상 -> 소문자면)
+		if char >= 'a' {
+			char = char - ('a' - 'A')
+		}
+
+		idx := int(char - 'A')
+
+		countArr[idx]++
+
+		//최대 카운트 계산
+		if max < countArr[idx] {
+			max = countArr[idx]
+			maxChar = char
+		} else if max == countArr[idx] {
+			maxChar = '?'
 		}
 	}
 
-	fmt.Fprintf(writer, "%c", maxKey)
+	fmt.Fprintf(writer, "%c", maxChar)
 }
